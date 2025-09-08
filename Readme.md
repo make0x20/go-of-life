@@ -21,7 +21,7 @@ gol
 
 Or specify custom rules using flags:
 ```bash
-gol -neighborhood=3 -survival="13,14,15,16" -birth="10,11,12,13 -speed=100"
+gol -neighborhood=3 -survival="13,14,15,16" -birth="10,11,12,13" -speed=100
 ```
 
 ## Command-line Flags
