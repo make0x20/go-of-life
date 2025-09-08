@@ -1,5 +1,7 @@
 # Go Game of Life
 
+![Screenshot](assets/screenshot.jpg)
+
 A terminal-based implementation of Conway's Game of Life with configurable cellular automata rules, written in Go.
 
 ## Installation
