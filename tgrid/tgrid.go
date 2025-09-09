@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"sync"
 )
 
 type Grid struct {
@@ -101,4 +102,20 @@ func (g *Grid) ForEach(fn func(x, y, index int)) {
 			fn(x, y, index)
 		}
 	}
+}
+
+// ForEachAsync loops through rows concurrently - columns are sequential still
+func (g *Grid) ForEachAsync(fn func(x, y, index int)) {
+	var wg sync.WaitGroup
+	for y := 0; y < g.Height; y++ {
+		wg.Add(1)
+		go func(row int) {
+			defer wg.Done()
+			for x := 0; x < g.Width; x++ {
+				index := row*g.Width + x
+				fn(x, row, index)
+			}
+		}(y)
+	}
+	wg.Wait()
 }

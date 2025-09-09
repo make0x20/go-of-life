@@ -54,7 +54,7 @@ func iterate(grid *tgrid.Grid, r Rules) {
 	newBuffer := make([]rune, len(grid.Buffer))
 	copy(newBuffer, grid.Buffer)
 
-	grid.ForEach(func(x, y, i int) {
+	grid.ForEachAsync(func(x, y, i int) {
 		currentCell, _ := grid.GetValue(x, y)
 		neighbors := checkNeighborhood(x, y, grid.Width, grid.Height, r.Cell, grid, r)
 
@@ -92,10 +92,8 @@ func checkNeighborhood(x, y, width, height int, v rune, grid *tgrid.Grid, r Rule
 			}
 
 			// If cell is alive add to alive count
-			nv, err := grid.GetValue(nx, ny)
-			if err != nil {
-				panic(err)
-			}
+			index := ny*width + nx
+			nv := grid.Buffer[index]
 
 			if nv == v {
 				alive++
