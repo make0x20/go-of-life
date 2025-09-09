@@ -1,9 +1,6 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	_ "net/http/pprof"
 	"os"
 	"go-of-life/tgrid"
 	"go-of-life/gameoflife"
@@ -12,12 +9,6 @@ import (
 
 func main() {
 	gr := ParseFlags()
-
-	// Start pprof server for profiling
-	go func() {
-		log.Println("Starting pprof server on :6060")
-		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()
 
 	terminal.SetRawMode()
 	terminal.HideCursor()
@@ -61,4 +52,3 @@ func main() {
 		}
 	}
 }
-
